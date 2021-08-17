@@ -58,10 +58,6 @@ class User(db.Model):
     isadmin = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    # Todo - Setup one-to-many relationship between user and liked image
-    # image_id = db.Column(db.Integer, db.ForeignKey('image.id'), nullable=False)
-    # liked = db.relationship('Image', backref=db.backref('users', lazy=True))
-
     def __repr__(self):
         return "<User: {}>".format(self.username)
 
@@ -287,8 +283,6 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             print(user, "USER FOUND")
-            # if user exist in database than we will compare our database hashed password and password come from login form 
-            print(user.password == form.password.data)
             if check_password_hash(user.password, form.password.data) or user.password == form.password.data:
                 # if password is matched, allow user to access and save email and username inside the session
                 # flash('You have successfully logged in.', "success")
@@ -300,11 +294,7 @@ def login():
                 session['id'] = user.id            
                 access_token = create_access_token(identity=user.username)
                 session['token'] = access_token
-
-                # Workaround before one-to-many relationship is setup for User and Images
-                Liked.query.delete()
                 
-                print(Liked.query.all(), "UHH")
                 # After successful login, redirecting to home page
                 return redirect(url_for('index'))
             else:
@@ -419,8 +409,6 @@ def update_image(id):
 def delete(id):
     user = User.query.filter_by(id=id).first()
     image = Image.query.filter_by(id=id).first()
-
-    print(request.path, "URL")
 
     if user and request.path == '/admin/delete/user/' + id:
         try:
