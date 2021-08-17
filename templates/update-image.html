@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Update Image - Flask Gallery{% endblock %}
+{% block mainhead %}
+<h1>Update Image</h1>
+{% endblock %}
+{% block main %}
+<form method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" value="{{ name }}" required /><br />
+    <label for="src">Source</label>
+    <input type="text" name="src" value="{{ src }}" required /><br />
+    <label for="alt">Alt</label>
+    <input type="text" name="alt" value="{{ alt }}" required /><br />
+    <label for="url">URL</label>
+    <input type="text" name="url" value="{{ url }}" required /><br />
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

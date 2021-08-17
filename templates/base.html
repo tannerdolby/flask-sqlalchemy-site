@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        {% block head %}
+        <title>{% block title %}{% endblock %}</title>
+        {% endblock %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/reset.css') }}">
+    </head>
+    <body>
+        <header class="top-header">
+            <nav id="main-nav">
+                <div class="home">
+                    <a class="link-home" href="/">Flask Photography</a>
+                    <!-- SVG from flaticon by @becris - https://www.flaticon.com/authors/becris -->
+                    {% if session['logged_in'] %}
+                    <a class="profile-link" href="/profile">{{ session['username'] }}<img width="30px" height="30px" src="{{ url_for('static', filename='/svg/user.svg') }}" alt="" /></a>
+                    {% endif %}
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Feed</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    {% if session.isadmin and session.logged_in %}
+                        <li><a href="/admin-dashboard">Dashboard</a></li>
+                    {% endif %}
+                    {% if session.logged_in %}
+                        <li><a href="/logout/">Logout</a></li>
+                    {% else %}
+                        <li><a href="/login/">Login</a></li>
+                        <li><a href="/register/">Sign up</a></li>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+        </header>
+        <div class="wrapper">
+            {% block mainhead %}{% endblock %}
+            {% block mainprev %}{% endblock %}
+            <main>
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+        <footer>
+            <div class="footer-wrap">
+                <p>&copy; {{ fname }} {{ lname }} {{ date.year }}. Built with Python and Flask</p>
+                <ul>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="#main-nav">Back to top</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>

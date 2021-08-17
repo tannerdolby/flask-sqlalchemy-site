@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Login - Flask Gallery{% endblock %}
+{% block mainhead %}
+<h1>Login</h1>
+{% endblock %}
+{% block main %}
+<p class="status">{{ msg }}</p>
+<form method="POST">
+    <label for="username">Email</label>
+    <input type="text" name="email" required /><br />
+    <label for="username">Username</label>
+    <input type="text" name="username" required /><br />
+    <label for="password">Password</label>
+    <input type="password" name="password" required /><br />
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

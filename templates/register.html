@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Register - Flask Gallery{% endblock %}
+{% block mainhead %}
+<h1>Register</h1>
+{% endblock %}
+
+{% macro render_field(field) %}
+  {{ field.label }}
+  {{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li style="display: none">{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% block main %}
+<form method="POST">
+    <label for="username">Email</label>
+    <input type="email" name="email" required /><br />
+    <label for="username">Username</label>
+    <input type="text" name="username" required /><br />
+    <label for="password">Password</label>
+    <input type="password" name="password" required /><br />
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{
+  "name": "flask-sqlalch-photo-site",
+  "version": "1.0.0",
+  "description": "A photography site with feed of gallery images where users with a profile may add images to their collection.",
+  "main": "server.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "python3 server.py"
+  },
+  "keywords": [
+    "flask",
+    "sql-alchemy",
+    "photography-site"
+  ],
+  "author": "Tanner Dolby",
+  "license": "MIT"
+}

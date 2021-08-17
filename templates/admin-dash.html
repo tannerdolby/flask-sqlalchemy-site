@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Flask Gallery{% endblock %}
+{% block mainhead %}
+<h1>Admin Dashboard</h1>
+<p>Perform CRUD operations on the <code>User</code> or <code>Image</code> database tables.</p>
+{% endblock %}
+{% block main %}
+<h2>User Table</h2>
+<a href="/admin/create/user">&plus; Create a new User</a>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>isAdmin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.isadmin }}</td>
+            <td>
+                <a href="/admin/edit/user/{{ user.id }}">Edit</a>
+                <a href="/admin/delete/user/{{ user.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Image Table</h2>
+<a href="/admin/create/image">&plus; Create a new Image</a>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Alt</th>
+            <th>URL</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for photo in images %}
+        <tr>
+            <td>{{ photo.id }}</td>
+            <td>{{ photo.name }}</td>
+            <td>{{ photo.alt }}</td>
+            <td>{{ photo.url }}</td>
+            <td>
+                <a href="/admin/edit/image/{{ photo.id }}">Edit</a>
+                <a href="/admin/delete/image/{{ photo.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if liked | length > 0 %}
+<h2>Liked Table</h2>
+<table>
+    <thead>
+        <tr>
+            <th>image_id</th>
+            <th>user_id</th>
+            <th>Name</th>
+            <th>Alt</th>
+            <th>URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for photo in liked %}
+        <tr>
+            <td>{{ photo.id }}</td>
+            <td>{{ photo.user_id }}</td>
+            <td>{{ photo.name }}</td>
+            <td>{{ photo.alt }}</td>
+            <td>{{ photo.url }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

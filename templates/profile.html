@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ session['username'] }}'s profile - Flask Photography{% endblock %}
+{% block mainhead %}
+<div class="wrap">
+    <img width="100px" height="100px" src="{{ url_for('static', filename='/svg/user.svg') }}" alt="User profile avatar" /> 
+    <h1 class="profile-title">{{ session['username'] }}'s profile {% if session.isadmin %}(<i>Admin</i>){% endif %}</h1>
+    <div class="details">
+        <p>Email: {{ session['email'] }}</p>
+        <p>Joined on: {{ session['created_at'] }}</p>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+    <h2>Liked Photos</h2>
+    <p>This list represents your liked photo collection. Head over to the <a href="/">feed</a> and start liking!</p>
+    <ul class="liked-list">
+        {% for img in photos %}
+            {% if session['id'] == img.user_id %}
+            <li>
+            {% if img.src == '' %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}" loading="lazy" />
+                {{ img.name }}
+            {% endif %}
+            {% if img.src != '' %}
+                <img src="{{ url_for('static', filename=img.src) }}" alt="{{ img.alt }}" loading="lazy" />
+                {{ img.name }}
+            {% endif %}
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+{% endblock %}

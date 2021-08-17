@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Flask Gallery{% endblock %}
+{% block mainhead %}
+<h1>Photo Gallery</h1>
+<p>Browse the feed of stock images provided by <a href="www.pexels.com">Pexels</a>. Once you have created a profile, start adding photos you like from the main feed to your profile's liked collections.</p>
+{% endblock %}
+{% block main %}
+    <section>
+        <ul class="gallery-feed">
+            {% for photo in photos %}
+                <li>
+                    <span style="display: inline" title="{{ photo.name }}" aria-label="{{ photo.name }}">
+                        {% if photo.src == '' %}
+                            <img src="{{ photo.url }}" alt="{{ photo.alt }}" loading="lazy" />
+                        {% endif %}
+                        {% if photo.src != '' %}
+                        <img src="{{ url_for('static', filename=photo.src) }}" alt="{{ photo.alt }}" loading="lazy" />
+                        {% endif %}
+                    </span>
+                    <div class="overlay">
+                        <p>{{ photo.name }}</p>
+                        <div>
+                            <form method="POST" class="like">
+                                <!-- SVG from flaticon.com - https://www.flaticon.com/authors/pixel-perfect -->
+                                <input style="display: none" type="text" name="title" value="{{ photo.name }}" />
+                                <button type="submit"><i><svg id="color" enable-background="new 0 0 24 24" height="20px" width="20px" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m11.466 22.776c.141.144.333.224.534.224s.393-.08.534-.224l9.594-9.721c4.001-4.053 1.158-11.055-4.532-11.055-3.417 0-4.985 2.511-5.596 2.98-.614-.471-2.172-2.98-5.596-2.98-5.672 0-8.55 6.984-4.531 11.055z" fill="#eee"/></svg></i></button>
+                                {# <i><svg id="color" enable-background="new 0 0 24 24" height="20px" width="20px" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m11.466 22.776c.141.144.333.224.534.224s.393-.08.534-.224l9.594-9.721c4.001-4.053 1.158-11.055-4.532-11.055-3.417 0-4.985 2.511-5.596 2.98-.614-.471-2.172-2.98-5.596-2.98-5.672 0-8.55 6.984-4.531 11.055z" fill="#eee"/></svg></i> #}
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
