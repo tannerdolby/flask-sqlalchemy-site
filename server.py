@@ -34,7 +34,6 @@ db = SQLAlchemy(app)
 
 # Form models
 class LoginForm(Form):
-    email=StringField('email',[validators.DataRequired()])
     username=StringField('username',[validators.DataRequired()])
     password=PasswordField('password',[validators.DataRequired()])
 
@@ -260,14 +259,19 @@ def register():
             password = hashed_password,
             email = form.email.data,
             isadmin = False)
-
-        # saving user object into data base with hashed password
-        db.session.add(new_user)
-        print("New user created: {}".format(new_user))
-        db.session.commit()
+        msg = ''
+        if new_user !=  '<User None>':
+            # saving user object into data base with hashed password
+            db.session.add(new_user)
+            print("New user created: {}".format(new_user))
+            msg = 'Account successfully created!'
+            db.session.commit()
+        else:
+            print("Unable to create user. That user already exists!")
+            msg = "Unable to create User. That account already exists!"
 
         # if registration successful, then redirecting to login Api
-        return redirect(url_for('login'))
+        return redirect(url_for('login', msg=msg))
     else:
         # if method is Get, than render registration form
         return render_template('register.html', form=form)
@@ -281,11 +285,11 @@ def login():
     if request.method == 'POST':
         # checking that user is exist or not by username
         user = User.query.filter_by(username=form.username.data).first()
+
         if user:
             print(user, "USER FOUND")
             if check_password_hash(user.password, form.password.data) or user.password == form.password.data:
                 # if password is matched, allow user to access and save email and username inside the session
-                # flash('You have successfully logged in.', "success")
                 session['logged_in'] = True
                 session['email'] = user.email
                 session['username'] = user.username

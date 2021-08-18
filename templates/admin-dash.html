@@ -25,8 +25,8 @@
             <td>{{ user.email }}</td>
             <td>{{ user.isadmin }}</td>
             <td>
-                <a href="/admin/edit/user/{{ user.id }}">Edit</a>
-                <a href="/admin/delete/user/{{ user.id }}">Delete</a>
+                <a class="edit" href="/admin/edit/user/{{ user.id }}">Edit</a>
+                <a class="delete" href="/admin/delete/user/{{ user.id }}">Delete</a>
             </td>
         </tr>
         {% endfor %}
@@ -52,8 +52,8 @@
             <td>{{ photo.alt }}</td>
             <td>{{ photo.url }}</td>
             <td>
-                <a href="/admin/edit/image/{{ photo.id }}">Edit</a>
-                <a href="/admin/delete/image/{{ photo.id }}">Delete</a>
+                <a class="edit" href="/admin/edit/image/{{ photo.id }}">Edit</a>
+                <a class="delete" href="/admin/delete/image/{{ photo.id }}">Delete</a>
             </td>
         </tr>
         {% endfor %}

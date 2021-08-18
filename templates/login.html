@@ -4,10 +4,8 @@
 <h1>Login</h1>
 {% endblock %}
 {% block main %}
-<p class="status">{{ msg }}</p>
-<form method="POST">
-    <label for="username">Email</label>
-    <input type="text" name="email" required /><br />
+<h2>{{ msg }}</h2>
+<form class="login" method="POST">
     <label for="username">Username</label>
     <input type="text" name="username" required /><br />
     <label for="password">Password</label>

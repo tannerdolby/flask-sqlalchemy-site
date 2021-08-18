@@ -92,15 +92,47 @@ table tr td:last-child {
 
 tr td:last-child a {
     margin: 0;
-    border: 1px solid lightgray;
-    background: #eee;
-    padding: 5px 8px;
+    color: #fff;
+    color: var(--foreground-text, #111);
+    padding: 3px 8px;
+    border-radius: 2px;
     color: var(--foreground-text);
 }
 
-tr td:last-child a:hover {
-    background: #ddd;
+tr td:last-child a.edit {
+    background: #0dcaf0;
+    background: #0d6efd;
+    background: #eee;
+    background: #adb5bd;
+    background: #ffc107;
+    color: var(--foreground-text, #000);
+}
+
+tr td:last-child a.delete {
+    background: #dc3545;
+    background: #e42d40;
+    background: #e92135;
+    background: #f02236;
+    color: #eee;
+}
+
+tr td:last-child a.edit:hover,
+tr td:last-child a.delete:hover {
     text-decoration: none;
+}
+
+tr td:last-child a.edit:hover {
+    background: #0b66ee;
+    background: #0962e7;
+    background: #f1b707;
+    background: #f3b809;
+}
+
+tr td:last-child a.delete:hover {
+    background: #d12d3d;
+    background: #da1d30;
+    background: #ec2034;
+    background: #e91f33;
 }
 
 tr td:last-child a:first-child {
@@ -364,6 +396,25 @@ main .gallery-feed {
     display: block;
 }
 
+form button:hover {
+    cursor: pointer;
+}
+
+.login button,
+.register button {
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 8px 2rem;
+    border-radius: 2px;
+    width: fit-content;
+}
+
+.login button:hover,
+.register button:hover {
+    background-color: #0b69f7;
+}
+
 .gallery-feed img:hover,
 .gallery-feed li:hover,
 .gallery-feed li a:hover {
@@ -380,6 +431,10 @@ main .gallery-feed {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    border: 2px solid #222;
+    box-shadow: 2px 2px 0 1px #222;
+    max-width: 80ch;
+    padding: 1.5rem 0 5px 0;
 }
 
 .wrap svg {
